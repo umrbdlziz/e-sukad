@@ -1,70 +1,61 @@
 import { useNavigate, useLocation } from "react-router-dom";
+import { navLinks } from "../constants";
+import { useState } from "react";
 
-const Sidebar = () => {
+const NavItems = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const currentPath = location.pathname;
 
   return (
-    <div className="w-64 h-screen">
-      <div className="py-5 border-b-2 border-purple-800 flex justify-center">
-        <img src="usm-esport.png" className="w-[140px] h-[140px]" />
-      </div>
-      <nav className="flex-grow p-4">
-        <ul className="space-y-4">
-          <li className="border-b border-purple-800 text-center pb-4">
-            <button
-              className={`w-full px-4 py-2 text-xl hover:text-orange-800 text-orange-500 ${
-                currentPath === "/" && "font-extrabold"
-              }`}
-              onClick={() => navigate("/")}
-            >
-              Dashboard
-            </button>
-          </li>
-          <li className="border-b border-purple-800 text-center pb-4">
-            <button
-              className={`w-full px-4 py-2 text-xl hover:text-orange-800 text-orange-500 ${
-                currentPath === "/schedule" && "font-extrabold"
-              }`}
-              onClick={() => navigate("/schedule")}
-            >
-              Schedule
-            </button>
-          </li>
-          <li className="border-b border-purple-800 text-center pb-4">
-            <button
-              className={`w-full px-4 py-2 text-xl hover:text-orange-800 text-orange-500  ${
-                currentPath === "/result" && "font-extrabold"
-              }`}
-              onClick={() => navigate("/result")}
-            >
-              Result
-            </button>
-          </li>
-          <li className="border-b border-purple-800 text-center pb-4">
-            <button
-              className={`w-full px-4 py-2 text-xl hover:text-orange-800 text-orange-500 ${
-                currentPath === "/teams" && "font-extrabold"
-              }`}
-              onClick={() => navigate("/teams")}
-            >
-              Teams/Players
-            </button>
-          </li>
-          <li className="border-b border-purple-800 text-center pb-4">
-            <button
-              className={`w-full px-4 py-2 text-xl hover:text-orange-800 text-orange-500 ${
-                currentPath === "/aboutus" && "font-extrabold"
-              }`}
-              onClick={() => navigate("/aboutus")}
-            >
-              About Us
-            </button>
-          </li>
-        </ul>
+    <ul className="px-4 w-full">
+      {navLinks.map(({ id, name, href }) => (
+        <li key={id} className="border-b border-purple-800 text-center py-4">
+          <button
+            className={`py-2 sm:hover:text-orange-800 text-orange-500 ${
+              currentPath === href && "font-extrabold"
+            }`}
+            onClick={() => navigate(href)}
+          >
+            {name}
+          </button>
+        </li>
+      ))}
+    </ul>
+  );
+};
+
+const Sidebar = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleMenu = () => setIsOpen((prevIsOpen) => !prevIsOpen);
+
+  return (
+    <header>
+      <button
+        onClick={toggleMenu}
+        className={`sm:hidden flex p-4 ${
+          !isOpen && "border-b border-purple-800 w-full"
+        }`}
+        aria-label="Toggle menu"
+      >
+        <img
+          src={isOpen ? "close.png" : "hamburger.png"}
+          alt="toggle"
+          className="w-6 h-6"
+        />
+      </button>
+
+      <nav className="sm:flex hidden w-52 h-[calc(100vh-80px)]">
+        <NavItems />
       </nav>
-    </div>
+
+      <div className={`nav-sidebar ${isOpen ? "max-h-screen" : "max-h-0"}`}>
+        <nav className="p-5">
+          <NavItems />
+        </nav>
+      </div>
+    </header>
   );
 };
 
