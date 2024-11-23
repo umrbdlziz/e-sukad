@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import { teamsData } from "../constants";
 
 const StandingsTable = ({ title, headers, data }) => {
   return (
@@ -36,11 +37,11 @@ const StandingsTable = ({ title, headers, data }) => {
                     {header === "Team" ? (
                       <div className="flex flex-row gap-3 justify-start items-center">
                         <img
-                          src={team.href}
+                          src={teamsData.find((t) => t.id === team.team).href}
                           className="w-[25px]"
                           alt="team logo"
                         />
-                        {team.team}
+                        {teamsData.find((t) => t.id === team.team).name}
                       </div>
                     ) : (
                       team[header.toLowerCase().replace(/ /g, "_")]
