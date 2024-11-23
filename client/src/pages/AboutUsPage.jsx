@@ -43,11 +43,11 @@ const AboutUsPage = () => {
         <div className="flex flex-wrap mt-6 justify-center">
           {/* Team Member 1 */}
           <div className="w-full sm:w-1/2 lg:w-1/4 p-4">
-            <div className="p-6 bg-white rounded-lg shadow-lg text-center min-h-[180px]">
+            <div className="p-6 bg-white rounded-lg shadow-lg text-center min-h-[180px] border-2 border-gray-300">
               <img
                 src="[TeamMember1ImageURL]"
                 alt="Muhd Umar"
-                className="w-24 h-24 mx-auto rounded-full mb-4"
+                className="w-24 h-24 mx-auto rounded-full mb-4 border-2 border-gray-300"
               />
               <h3 className="text-lg font-semibold whitespace-normal">Muhd Umar</h3>
               <p className="text-gray-600">Lead Developer</p>
@@ -55,11 +55,11 @@ const AboutUsPage = () => {
           </div>
           {/* Team Member 2 */}
           <div className="w-full sm:w-1/2 lg:w-1/4 p-4">
-            <div className="p-6 bg-white rounded-lg shadow-lg text-center min-h-[180px]">
+            <div className="p-6 bg-white rounded-lg shadow-lg text-center min-h-[180px] border-2 border-gray-300">
               <img
                 src="[TeamMember2ImageURL]"
                 alt="Muhd Amar"
-                className="w-24 h-24 mx-auto rounded-full mb-4"
+                className="w-24 h-24 mx-auto rounded-full mb-4 border-2 border-gray-300"
               />
               <h3 className="text-lg font-semibold whitespace-normal">Muhd Amar</h3>
               <p className="text-gray-600">Lead Designer</p>
@@ -67,11 +67,11 @@ const AboutUsPage = () => {
           </div>
           {/* Team Member 3 */}
           <div className="w-full sm:w-1/2 lg:w-1/4 p-4">
-            <div className="p-6 bg-white rounded-lg shadow-lg text-center min-h-[180px]">
+            <div className="p-6 bg-white rounded-lg shadow-lg text-center min-h-[180px] border-2 border-gray-300 ">
               <img
                 src="/about/arif.jpg"
                 alt="Arif Haziq"
-                className="w-24 h-24 mx-auto rounded-full mb-4 object-cover"
+                className="w-24 h-24 mx-auto rounded-full mb-4 object-cover border-2 border-gray-300"
               />
               <h3 className="text-lg font-semibold whitespace-normal">Arif Haziq</h3>
               <p className="text-gray-600">Project Manager</p>
@@ -79,11 +79,11 @@ const AboutUsPage = () => {
           </div>
           {/* Team Member 4 */}
           <div className="w-full sm:w-1/2 lg:w-1/4 p-4">
-            <div className="p-6 bg-white rounded-lg shadow-lg text-center min-h-[180px]">
+            <div className="p-6 bg-white rounded-lg shadow-lg text-center min-h-[180px] border-2 border-gray-300">
               <img
                 src="[TeamMember4ImageURL]"
                 alt="Muhd Rusydi"
-                className="w-24 h-24 mx-auto rounded-full mb-4"
+                className="w-24 h-24 mx-auto rounded-full mb-4 border-2 border-gray-300"
               />
               <h3 className="text-lg font-semibold whitespace-normal">Muhd Rusydi</h3>
               <p className="text-gray-600">QA Engineer</p>
