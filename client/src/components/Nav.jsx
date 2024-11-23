@@ -1,21 +1,24 @@
 import { useNavigate, useLocation } from "react-router-dom";
-import { navLinks } from "../constants";
+import { navData } from "../constants";
 import { useState } from "react";
 
-const NavItems = () => {
+const NavItems = ({ setIsOpen }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const currentPath = location.pathname;
 
   return (
     <ul className="px-4 w-full">
-      {navLinks.map(({ id, name, href }) => (
-        <li key={id} className="border-b border-purple-800 text-center py-4">
+      {navData.map(({ id, name, href }) => (
+        <li key={id} className="py-4">
           <button
-            className={`py-2 sm:hover:text-orange-800 text-orange-500 ${
+            className={`py-2 sm:hover:text-purple-500 text-orange-500 ${
               currentPath === href && "font-extrabold"
             }`}
-            onClick={() => navigate(href)}
+            onClick={() => {
+              navigate(href);
+              setIsOpen(false);
+            }}
           >
             {name}
           </button>
@@ -46,13 +49,13 @@ const Sidebar = () => {
         />
       </button>
 
-      <nav className="sm:flex hidden w-52 h-[calc(100vh-80px)]">
-        <NavItems />
+      <nav className="sm:flex hidden w-52 h-[calc(100vh-82px)] border-r-2 border-purple-400">
+        <NavItems setIsOpen={setIsOpen} />
       </nav>
 
       <div className={`nav-sidebar ${isOpen ? "max-h-screen" : "max-h-0"}`}>
-        <nav className="p-5">
-          <NavItems />
+        <nav className="p-5 rounded-b-3xl">
+          <NavItems setIsOpen={setIsOpen} />
         </nav>
       </div>
     </header>

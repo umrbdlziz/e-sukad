@@ -1,7 +1,7 @@
 import HomePage from "./HomePage";
-import ResultPage from "./ResultPage";
+import StatisticsPage from "./StatisticsPage";
 import AboutUsPage from "./AboutUsPage";
 import SchedulePage from "./SchedulePage";
 import TeamsPage from "./TeamsPage";
 
-export { HomePage, ResultPage, AboutUsPage, SchedulePage, TeamsPage };
+export { HomePage, StatisticsPage, AboutUsPage, SchedulePage, TeamsPage };

@@ -1,4 +1,6 @@
-@import url("https://fonts.cdnfonts.com/css/inter");
+/* @import url("https://fonts.cdnfonts.com/css/inter"); */
+@import url("https://fonts.cdnfonts.com/css/proxima-nova-condensed");
+/* @import url("https://cdn.jsdelivr.net/npm/@canvas-fonts/helvetica@1.0.4/index.min.js"); */
 
 @tailwind base;
 @tailwind components;
@@ -10,11 +12,11 @@
 
 body {
   background: #f4f4f4;
-  font-family: "Inter", sans-serif;
+  font-family: "Proxima Nova Condensed", sans-serif;
 }
 
 @layer utilities {
   .nav-sidebar {
-    @apply absolute left-0 right-0 backdrop-blur-sm transition-all duration-300 ease-in-out overflow-hidden z-20 mx-auto sm:hidden block;
+    @apply absolute left-0 right-0 backdrop-blur-md transition-all duration-300 ease-in-out overflow-hidden z-20 mx-auto sm:hidden block text-center;
   }
 }
