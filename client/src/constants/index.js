@@ -613,3 +613,98 @@ export const matchSchedule = [
     ],
   },
 ];
+
+export const playersData = [
+  // Players for Mobile Legends: Bang Bang (MLBB)
+  {
+    id: 1,
+    name: "Player One",
+    teamId: 1, // Refers to Team Liquid
+    game: "MLBB",
+    kills: 80,
+    assists: 40,
+    deaths: 20,
+    towers_destroyed: 15,
+    gold_earned: 75000,
+    mvp: 3,
+  },
+  {
+    id: 2,
+    name: "Player Two",
+    teamId: 1, // Refers to Team Liquid
+    game: "MLBB",
+    kills: 70,
+    assists: 45,
+    deaths: 30,
+    towers_destroyed: 10,
+    gold_earned: 70000,
+    mvp: 2,
+  },
+  {
+    id: 3,
+    name: "Player Three",
+    teamId: 2, // Refers to Team Falcons
+    game: "MLBB",
+    kills: 60,
+    assists: 50,
+    deaths: 25,
+    towers_destroyed: 8,
+    gold_earned: 65000,
+    mvp: 1,
+  },
+
+  // Players for Valorant
+  {
+    id: 4,
+    name: "Agent Zero",
+    teamId: 3, // Refers to Fnatic
+    game: "Valorant",
+    kills: 200,
+    headshots: 60,
+    deaths: 50,
+    spike_plants: 30,
+    defuses: 15,
+    mvp: 4,
+  },
+  {
+    id: 5,
+    name: "Agent One",
+    teamId: 4, // Refers to Team Secret
+    game: "Valorant",
+    kills: 180,
+    headshots: 55,
+    deaths: 60,
+    spike_plants: 25,
+    defuses: 20,
+    mvp: 3,
+  },
+
+  // Players for PUBG
+  {
+    id: 6,
+    name: "Sniper Pro",
+    teamId: 5, // Refers to Ninjas in Pyjamas
+    game: "PUBG",
+    kills: 100,
+    damage_dealt: 1500,
+    knockdowns: 20,
+    headshots: 30,
+    survival_time: "30m",
+    chicken_dinners: 4,
+    mvp: 2,
+  },
+  {
+    id: 7,
+    name: "Assault King",
+    teamId: 6, // Refers to Twisted Minds
+    game: "PUBG",
+    kills: 120,
+    damage_dealt: 2000,
+    knockdowns: 25,
+    headshots: 40,
+    survival_time: "35m",
+    chicken_dinners: 5,
+    mvp: 3,
+  },
+];
+
