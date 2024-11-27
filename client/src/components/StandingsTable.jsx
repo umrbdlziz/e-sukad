@@ -19,7 +19,7 @@ const StandingsTable = ({ title, headers, data }) => {
   };
 
   return (
-    <div className="flex flex-col items-center p-6">
+    <div className="flex flex-col items-center border border-gray-300 rounded-lg p-6 shadow-sm">
       <h1 className="text-2xl font-bold mb-4">{title}</h1>
       <div className="w-full overflow-auto">
         <table className="mx-auto overflow-auto border-collapse border-t border-b border-gray-300 bg-white font-semibold text-sm rounded-lg">

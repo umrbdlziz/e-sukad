@@ -166,18 +166,27 @@ const HomePage = ({ isAdmin }) => {
               <p className="mb-2">Date: 25th December 2023</p>
               <p className="mb-2">Location: USM Esports Arena</p>
               <p className="mb-2">Description: Join us for an exciting event featuring top teams and players competing in various esports tournaments.</p>
+              <p className="mb-4 mt-8 text-center">
+                <a href="https://www.google.com/forms/about/" className="text-blue-500 hover:underline">CLICK HERE TO REGISTER</a>
+              </p>
             </div>
             <div>
               <img src={Valo} alt="Event Detail 2" className="w-full h-[450px] object-cover mb-4" />
               <p className="mb-2">Date: 26th December 2023</p>
               <p className="mb-2">Location: USM Esports Arena</p>
               <p className="mb-2">Description: Join us for an exciting event featuring top teams and players competing in various esports tournaments.</p>
+              <p className="mb-4 mt-8 text-center">
+                <a href="https://www.google.com/forms/about/" className="text-blue-500 hover:underline">CLICK HERE TO REGISTER</a>
+              </p>
             </div>
             <div>
               <img src={PUBG} alt="Event Detail 3" className="w-full h-[450px] object-cover mb-4" />
               <p className="mb-2">Date: 27th December 2023</p>
               <p className="mb-2">Location: USM Esports Arena</p>
               <p className="mb-2">Description: Join us for an exciting event featuring top teams and players competing in various esports tournaments.</p>
+              <p className="mb-4 mt-8 text-center">
+                <a href="https://www.google.com/forms/about/" className="text-blue-500 hover:underline">CLICK HERE TO REGISTER</a>
+              </p>            
             </div>
           </Slider>
           {isAdmin && ( // Only render the button if isAdmin is true
