@@ -45,9 +45,9 @@ const AboutUsPage = () => {
           <div className="w-full sm:w-1/2 lg:w-1/4 p-4">
             <div className="p-6 bg-white rounded-lg shadow-lg text-center min-h-[180px] border-2 border-gray-300">
               <img
-                src="[TeamMember1ImageURL]"
+                src="/about/umar.jpg"
                 alt="Muhd Umar"
-                className="w-24 h-24 mx-auto rounded-full mb-4 border-2 border-gray-300"
+                className="w-24 h-24 mx-auto rounded-full mb-4 object-cover border-2 border-gray-300"
               />
               <h3 className="text-lg font-semibold whitespace-normal">Muhd Umar</h3>
               <p className="text-gray-600">Lead Developer</p>
@@ -57,9 +57,9 @@ const AboutUsPage = () => {
           <div className="w-full sm:w-1/2 lg:w-1/4 p-4">
             <div className="p-6 bg-white rounded-lg shadow-lg text-center min-h-[180px] border-2 border-gray-300">
               <img
-                src="[TeamMember2ImageURL]"
+                src="/about/amar.jpg"
                 alt="Muhd Amar"
-                className="w-24 h-24 mx-auto rounded-full mb-4 border-2 border-gray-300"
+                className="w-24 h-24 mx-auto rounded-full mb-4 object-cover border-2 border-gray-300"
               />
               <h3 className="text-lg font-semibold whitespace-normal">Muhd Amar</h3>
               <p className="text-gray-600">Lead Designer</p>
@@ -81,9 +81,9 @@ const AboutUsPage = () => {
           <div className="w-full sm:w-1/2 lg:w-1/4 p-4">
             <div className="p-6 bg-white rounded-lg shadow-lg text-center min-h-[180px] border-2 border-gray-300">
               <img
-                src="[TeamMember4ImageURL]"
+                src="/about/udy.jpg"
                 alt="Muhd Rusydi"
-                className="w-24 h-24 mx-auto rounded-full mb-4 border-2 border-gray-300"
+                className="w-24 h-24 mx-auto rounded-full mb-4 object-cover border-2 border-gray-300"
               />
               <h3 className="text-lg font-semibold whitespace-normal">Muhd Rusydi</h3>
               <p className="text-gray-600">QA Engineer</p>
