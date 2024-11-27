@@ -493,8 +493,139 @@ export const pubgHeaders = [
 
 export const matchSchedule = [
   {
+    id: 11,
+    datetime: "2024-11-24T14:00:00",
+    game: "valorant",
+    stage: "Group Stage",
+    bo: 1,
+    duration: "45m",
+    location: "Training Room, University Hall",
+    teams: [
+      { id: 1, result: 1 },
+      { id: 2, result: 0 },
+    ],
+  },
+  {
+    id: 12,
+    datetime: "2024-11-24T15:00:00",
+    game: "valorant",
+    stage: "Group Stage",
+    bo: 1,
+    duration: "45m",
+    location: "Training Room, University Hall",
+    teams: [
+      { id: 3, result: 0 },
+      { id: 4, result: 1 },
+    ],
+  },
+  {
+    id: 13,
+    datetime: "2024-11-24T16:00:00",
+    game: "valorant",
+    stage: "Group Stage",
+    bo: 1,
+    duration: "45m",
+    location: "Training Room, University Hall",
+    teams: [
+      { id: 5, result: 1 },
+      { id: 6, result: 0 },
+    ],
+  },
+  {
+    id: 14,
+    datetime: "2024-11-24T17:00:00",
+    game: "valorant",
+    stage: "Group Stage",
+    bo: 1,
+    duration: "45m",
+    location: "Training Room, University Hall",
+    teams: [
+      { id: 7, result: 0 },
+      { id: 8, result: 1 },
+    ],
+  },
+  {
+    id: 15,
+    datetime: "2024-11-24T18:00:00",
+    game: "valorant",
+    stage: "Group Stage",
+    bo: 1,
+    duration: "45m",
+    location: "Training Room, University Hall",
+    teams: [
+      { id: 9, result: 1 },
+      { id: 10, result: 0 },
+    ],
+  },
+  {
+    id: 16,
+    datetime: "2024-11-25T14:00:00",
+    game: "pubg",
+    stage: "Quarter Finals",
+    bo: 3,
+    duration: "1h 30m",
+    location: "Main Auditorium, University Hall",
+    teams: [
+      { id: 1, result: 1 },
+      { id: 2, result: 2 },
+    ],
+  },
+  {
+    id: 17,
+    datetime: "2024-11-25T16:00:00",
+    game: "pubg",
+    stage: "Quarter Finals",
+    bo: 3,
+    duration: "1h 20m",
+    location: "Main Auditorium, University Hall",
+    teams: [
+      { id: 3, result: null },
+      { id: 4, result: null },
+    ],
+  },
+  {
+    id: 18,
+    datetime: "2024-11-26T14:00:00",
+    game: "pubg",
+    stage: "Semi Finals",
+    bo: 5,
+    duration: null,
+    location: "E-Sports Arena, University Hall",
+    teams: [
+      { id: 5, result: null },
+      { id: 6, result: null },
+    ],
+  },
+  {
+    id: 19,
+    datetime: "2024-11-26T16:00:00",
+    game: "pubg",
+    stage: "Semi Finals",
+    bo: 5,
+    duration: "2h",
+    location: "E-Sports Arena, University Hall",
+    teams: [
+      { id: 7, result: null },
+      { id: 8, result: null },
+    ],
+  },
+  {
+    id: 20,
+    datetime: "2024-11-27T14:00:00",
+    game: "pubg",
+    stage: "Finals",
+    bo: 7,
+    duration: "3h",
+    location: "Grand Stadium, University Hall",
+    teams: [
+      { id: 9, result: null },
+      { id: 10, result: null },
+    ],
+  },
+  {
     id: 6,
     datetime: "2024-11-24T14:00:00",
+    game: "mlbb",
     stage: "Group Stage",
     bo: 1,
     duration: "45m",
@@ -507,6 +638,7 @@ export const matchSchedule = [
   {
     id: 7,
     datetime: "2024-11-24T15:00:00",
+    game: "mlbb",
     stage: "Group Stage",
     bo: 1,
     duration: "45m",
@@ -519,6 +651,7 @@ export const matchSchedule = [
   {
     id: 8,
     datetime: "2024-11-24T16:00:00",
+    game: "mlbb",
     stage: "Group Stage",
     bo: 1,
     duration: "45m",
@@ -531,6 +664,7 @@ export const matchSchedule = [
   {
     id: 9,
     datetime: "2024-11-24T17:00:00",
+    game: "mlbb",
     stage: "Group Stage",
     bo: 1,
     duration: "45m",
@@ -543,6 +677,7 @@ export const matchSchedule = [
   {
     id: 10,
     datetime: "2024-11-24T18:00:00",
+    game: "mlbb",
     stage: "Group Stage",
     bo: 1,
     duration: "45m",
@@ -555,6 +690,7 @@ export const matchSchedule = [
   {
     id: 1,
     datetime: "2024-11-25T14:00:00",
+    game: "mlbb",
     stage: "Quarter Finals",
     bo: 3,
     duration: "1h 30m",
@@ -567,6 +703,7 @@ export const matchSchedule = [
   {
     id: 2,
     datetime: "2024-11-25T16:00:00",
+    game: "mlbb",
     stage: "Quarter Finals",
     bo: 3,
     duration: "1h 20m",
@@ -579,6 +716,7 @@ export const matchSchedule = [
   {
     id: 3,
     datetime: "2024-11-26T14:00:00",
+    game: "mlbb",
     stage: "Semi Finals",
     bo: 5,
     duration: null,
@@ -591,6 +729,7 @@ export const matchSchedule = [
   {
     id: 4,
     datetime: "2024-11-26T16:00:00",
+    game: "mlbb",
     stage: "Semi Finals",
     bo: 5,
     duration: "2h",
@@ -603,6 +742,7 @@ export const matchSchedule = [
   {
     id: 5,
     datetime: "2024-11-27T14:00:00",
+    game: "mlbb",
     stage: "Finals",
     bo: 7,
     duration: "3h",
@@ -708,3 +848,15 @@ export const playersData = [
   },
 ];
 
+export const matchScheduleForm = {
+  datetime: "",
+  game: "",
+  stage: "",
+  bo: "",
+  duration: "",
+  location: "",
+  teams: [
+    { id: 0, result: 0 },
+    { id: 0, result: 0 },
+  ],
+};

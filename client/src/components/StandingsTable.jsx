@@ -1,7 +1,23 @@
 import PropTypes from "prop-types";
 import { teamsData } from "../constants";
+import Modal from "./Model";
+import { useState } from "react";
 
 const StandingsTable = ({ title, headers, data }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedData, setSelectedData] = useState({});
+  const [modalAction, setModalAction] = useState("");
+  const [teamLogo, setTeamLogo] = useState("");
+
+  const handleOpenModal = (action, data = {}, href) => {
+    setSelectedData(data);
+    setModalAction(action);
+    setTeamLogo(href);
+    setTimeout(() => {
+      setIsModalOpen(true);
+    }, 0);
+  };
+
   return (
     <div className="flex flex-col items-center p-6">
       <h1 className="text-2xl font-bold mb-4">{title}</h1>
@@ -28,6 +44,13 @@ const StandingsTable = ({ title, headers, data }) => {
                 className={`${
                   index % 2 === 0 ? "bg-gray-200" : "bg-white"
                 } hover:bg-gray-300`}
+                onClick={() =>
+                  handleOpenModal(
+                    "Edit",
+                    team,
+                    teamsData.find((t) => t.id === team.team).href
+                  )
+                }
               >
                 {headers.map((header, i) => (
                   <td
@@ -53,6 +76,14 @@ const StandingsTable = ({ title, headers, data }) => {
           </tbody>
         </table>
       </div>
+      <Modal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onSubmit={() => setIsModalOpen(false)}
+        initialData={selectedData}
+        action={modalAction}
+        image={teamLogo}
+      />
     </div>
   );
 };
