@@ -18,7 +18,10 @@ const StatisticsPage = () => {
   };
 
   return (
-    <section>
+    <section className="p-4">
+      <div className="bg-white border border-gray-300 rounded-lg p-6 shadow-sm">
+      <h1 className="text-2xl font-semibold text-center">STATISTICS</h1>
+      <hr className="border-t border-gray-300 w-full my-4" />
       <GameSelector
         selectedGame={selectedGame}
         onGameChange={handleGameChange}
@@ -45,6 +48,7 @@ const StatisticsPage = () => {
           data={pubgTeams}
         />
       )}
+    </div>
     </section>
   );
 };
