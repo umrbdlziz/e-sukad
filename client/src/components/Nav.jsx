@@ -34,7 +34,7 @@ const Sidebar = () => {
   const toggleMenu = () => setIsOpen((prevIsOpen) => !prevIsOpen);
 
   return (
-    <header>
+    <header className="border-r-2 border-purple-400">
       <button
         onClick={toggleMenu}
         className={`sm:hidden flex p-4 ${
@@ -49,7 +49,7 @@ const Sidebar = () => {
         />
       </button>
 
-      <nav className="sm:flex hidden w-52 h-[calc(100vh-82px)] border-r-2 border-purple-400">
+      <nav className="sm:flex hidden w-52 h-[calc(100vh-82px)] ">
         <NavItems setIsOpen={setIsOpen} />
       </nav>
 

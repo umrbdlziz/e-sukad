@@ -33,62 +33,73 @@ const Modal = ({ isOpen, onClose, onSubmit, initialData, action, image }) => {
             <img src={image} alt="team logo" className="w-24 mx-auto" />
           </div>
         )}
+
         <form onSubmit={handleSubmit}>
-          {Object.keys(initialData).map((key) =>
-            key === "teams" ? (
-              <div className="mb-4" key={key}>
-                <label className="block text-gray-700 capitalize">
-                  team A name
-                </label>
-                <input
-                  type="text"
-                  name={key}
-                  className="w-full px-3 py-2 border rounded-lg"
-                />
-                <label className="block text-gray-700 capitalize">
-                  team B name
-                </label>
-                <input
-                  type="text"
-                  name={key}
-                  className="w-full px-3 py-2 border rounded-lg"
-                />
-                {formData[key][0].result === null && (
-                  <>
-                    <label className="block text-gray-700 capitalize">
-                      {teamsData.find((t) => t.id === formData[key][0].id).name}{" "}
-                      result
-                    </label>
-                    <input
-                      type="text"
-                      name={key}
-                      className="w-full px-3 py-2 border rounded-lg"
-                    />
-                    <label className="block text-gray-700 capitalize">
-                      {teamsData.find((t) => t.id === formData[key][1].id).name}{" "}
-                      result
-                    </label>
-                    <input
-                      type="text"
-                      name={key}
-                      className="w-full px-3 py-2 border rounded-lg"
-                    />
-                  </>
-                )}
-              </div>
-            ) : (
-              <div className="mb-4" key={key}>
-                <label className="block text-gray-700 capitalize">{key}</label>
-                <input
-                  type="text"
-                  name={key}
-                  value={formData[key] || ""}
-                  onChange={handleChange}
-                  className="w-full px-3 py-2 border rounded-lg"
-                />
-              </div>
-            )
-          )}
+          <div className="grid grid-cols-2 gap-4 mb-4">
+            {Object.keys(initialData).map((key) =>
+              key === "teams" ? (
+                <div className="col-span-2" key={key}>
+                  <label className="block text-gray-700 capitalize">
+                    team A name
+                  </label>
+                  <input
+                    type="text"
+                    name={key}
+                    className="w-full px-3 py-2 border rounded-lg"
+                  />
+                  <label className="block text-gray-700 capitalize">
+                    team B name
+                  </label>
+                  <input
+                    type="text"
+                    name={key}
+                    className="w-full px-3 py-2 border rounded-lg"
+                  />
+                  {formData[key][0].result === null && (
+                    <>
+                      <label className="block text-gray-700 capitalize">
+                        {
+                          teamsData.find((t) => t.id === formData[key][0].id)
+                            .name
+                        }{" "}
+                        result
+                      </label>
+                      <input
+                        type="text"
+                        name={key}
+                        className="w-full px-3 py-2 border rounded-lg"
+                      />
+                      <label className="block text-gray-700 capitalize">
+                        {
+                          teamsData.find((t) => t.id === formData[key][1].id)
+                            .name
+                        }{" "}
+                        result
+                      </label>
+                      <input
+                        type="text"
+                        name={key}
+                        className="w-full px-3 py-2 border rounded-lg"
+                      />
+                    </>
+                  )}
+                </div>
+              ) : (
+                <div key={key}>
+                  <label className="block text-gray-700 capitalize">
+                    {key}
+                  </label>
+                  <input
+                    type="text"
+                    name={key}
+                    value={formData[key] || ""}
+                    onChange={handleChange}
+                    className="w-full px-3 py-2 border rounded-lg"
+                  />
+                </div>
+              )
+            )}
+          </div>
           <div className="flex justify-end space-x-4">
             <button
               type="button"
