@@ -126,9 +126,12 @@ import MLBB from '../../public/Home/MLBB.jpg';
 import Valo from '../../public/Home/Valo.jpg';
 import PUBG from '../../public/Home/PUBG.jpg';
 import USM from '../../public/Home/USM.jpg';
+import Edit from '../components/Edit';
 
 const HomePage = ({ isAdmin }) => {
   const [showPopup, setShowPopup] = useState(false);
+  const [editPopup, setEditPopup] = useState(false);
+  const [currentEvent, setCurrentEvent] = useState(null);
 
   const handleButtonClick = () => {
     setShowPopup(true);
@@ -151,10 +154,8 @@ const HomePage = ({ isAdmin }) => {
   return (
     <div className="p-4">
       <div className="banner mb-8">
-        <div className="bg-white shadow-md rounded-lg overflow-hidden" style={{ height: '350px' }}>
-          <div>
-            <img src={USM} alt="News Banner 1" className="w-full h-full object-cover" />
-          </div>
+        <div className="bg-white shadow-md rounded-lg overflow-hidden flex items-center justify-center" style={{ height: '270px' }}>
+          <img src={USM} alt="News Banner 1" style={{ transform: 'scale(1)', width: 'auto', height: 'auto' }} />
         </div>
       </div>
       <div className="event-details">
@@ -169,24 +170,99 @@ const HomePage = ({ isAdmin }) => {
               <p className="mb-4 mt-8 text-center">
                 <a href="https://www.google.com/forms/about/" className="text-blue-500 hover:underline">CLICK HERE TO REGISTER</a>
               </p>
+              {isAdmin && (
+                <div className="flex justify-end space-x-2 mt-4">
+                  <button
+                    className="px-4 py-2 bg-orange-500 text-white rounded-lg"
+                    onClick={() => {
+                      setEditPopup(true);
+                      setCurrentEvent({
+                        image: "https://example.com/MLBB.jpg",
+                        date: "2023-12-25",
+                        location: "USM Esports Arena",
+                        description: "Join us for an exciting event featuring top teams and players competing in various esports tournaments.",
+                        registrationLink: "https://www.google.com/forms/about/"
+                      });
+                    }}
+                  >
+                    Edit
+                  </button>
+                  <button
+                    className="px-4 py-2 bg-red-500 text-white rounded-lg"
+                    onClick={() => console.log("Delete Event Triggered")}
+                  >
+                    Delete
+                  </button>
+                </div>
+              )}
             </div>
             <div>
               <img src={Valo} alt="Event Detail 2" className="w-full h-[450px] object-cover mb-4" />
               <p className="mb-2">Date: 26th December 2023</p>
-              <p className="mb-2">Location: USM Esports Arena</p>
+              <p className="mb-2">Location: Dewan Utama Pelajar A</p>
               <p className="mb-2">Description: Join us for an exciting event featuring top teams and players competing in various esports tournaments.</p>
               <p className="mb-4 mt-8 text-center">
                 <a href="https://www.google.com/forms/about/" className="text-blue-500 hover:underline">CLICK HERE TO REGISTER</a>
               </p>
+              {isAdmin && (
+                <div className="flex justify-end space-x-2 mt-4">
+                  <button
+                    className="px-4 py-2 bg-orange-500 text-white rounded-lg"
+                    onClick={() => {
+                      setEditPopup(true);
+                      setCurrentEvent({
+                        image: "https://example.com/Valorant.jpg",
+                        date: "2023-12-26",
+                        location: "Dewan Utama Pelajar A",
+                        description: "Join us for an exciting event featuring top teams and players competing in various esports tournaments.",
+                        registrationLink: "https://www.google.com/forms/about/"
+                      });
+                    }}
+                  >
+                    Edit
+                  </button>
+                  <button
+                    className="px-4 py-2 bg-red-500 text-white rounded-lg"
+                    onClick={() => console.log("Delete Event Triggered")}
+                  >
+                    Delete
+                  </button>
+                </div>
+              )}
             </div>
             <div>
               <img src={PUBG} alt="Event Detail 3" className="w-full h-[450px] object-cover mb-4" />
-              <p className="mb-2">Date: 27th December 2023</p>
-              <p className="mb-2">Location: USM Esports Arena</p>
+              <p className="mb-2">Date: 27th November 2024</p>
+              <p className="mb-2">Location: Online</p>
               <p className="mb-2">Description: Join us for an exciting event featuring top teams and players competing in various esports tournaments.</p>
               <p className="mb-4 mt-8 text-center">
                 <a href="https://www.google.com/forms/about/" className="text-blue-500 hover:underline">CLICK HERE TO REGISTER</a>
-              </p>            
+              </p>
+              {isAdmin && (
+                <div className="flex justify-end space-x-2 mt-4">
+                  <button
+                    className="px-4 py-2 bg-orange-500 text-white rounded-lg"
+                    onClick={() => {
+                      setEditPopup(true);
+                      setCurrentEvent({
+                        image: "https://example.com/image.jpg",
+                        date: "2024-11-27",
+                        location: "Online",
+                        description: "Join us for an exciting event featuring top teams and players competing in various esports tournaments.",
+                        registrationLink: "https://www.google.com/forms/about/"
+                      });
+                    }}
+                  >
+                    Edit
+                  </button>
+                  <button
+                    className="px-4 py-2 bg-red-500 text-white rounded-lg"
+                    onClick={() => console.log("Delete Event Triggered")}
+                  >
+                    Delete
+                  </button>
+                </div>
+              )}
             </div>
           </Slider>
           {isAdmin && ( // Only render the button if isAdmin is true
@@ -224,18 +300,18 @@ const HomePage = ({ isAdmin }) => {
                 <textarea className="border rounded w-full py-2 px-3"></textarea>
               </div>
               <div className="mb-4">
-                <label className="block text-gray-700">Contact</label>
+                <label className="block text-gray-700">Registration Link</label>
                 <input type="text" className="border rounded w-full py-2 px-3" />
               </div>
-              <div className="flex justify-end">
+              <div className="flex justify-end space-x-4">
                 <button 
                   type="button" 
-                  className="bg-red-500 text-white px-4 py-2 rounded mr-2"
+                  className="px-4 py-2 bg-gray-500 text-white rounded-lg"
                   onClick={handleClosePopup}
                 >
                   Cancel
                 </button>
-                <button type="submit" className="bg-green-500 text-white px-4 py-2 rounded">
+                <button type="submit" className="px-4 py-2 bg-orange-500 text-white rounded-lg">
                   Save
                 </button>
               </div>
@@ -243,6 +319,16 @@ const HomePage = ({ isAdmin }) => {
           </div>
         </div>
       )}
+      <Edit
+        isOpen={editPopup}
+        onClose={() => setEditPopup(false)}
+        onSubmit={(updatedEvent) => {
+          console.log("Updated Event:", updatedEvent);
+          setEditPopup(false);
+        }}
+        initialData={currentEvent || {}}
+        action="edit"
+      />
     </div>
   );
 };
