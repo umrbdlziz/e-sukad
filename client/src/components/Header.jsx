@@ -1,27 +1,11 @@
-// const Header = () => {
-//   return (
-//     <header className="border-b-2 border-purple-700 ">
-//       <div className="flex flex-row justify-between items-center px-5 h-20 max-w-7xl mx-auto w-full">
-//         <div className="flex justify-center items-center gap-6">
-//           <img src="usm-esport.png" className="w-[50px] h-[50px]" />
-//           <h1>Welcome, Umar</h1>
-//         </div>
-//         <div className="flex flex-row gap-3">
-//           <img src="user.png" className="w-[25px] h-[25px] cursor-pointer" />
-//           <img src="setting.svg" className="w-[25px] h-[25px] cursor-pointer" />
-//         </div>
-//       </div>
-//     </header>
-//   );
-// };
-
-// export default Header;
-
-import React, { useState } from "react";
+import { useState } from "react";
 
 const Header = ({ isAdmin, setIsAdmin }) => {
   const [showLoginPopup, setShowLoginPopup] = useState(false);
-  const [credentials, setCredentials] = useState({ username: "", password: "" });
+  const [credentials, setCredentials] = useState({
+    username: "",
+    password: "",
+  });
   const [error, setError] = useState("");
 
   const handleAdminClick = () => {
@@ -39,8 +23,12 @@ const Header = ({ isAdmin, setIsAdmin }) => {
     const validUsername = "admin";
     const validPassword = "password";
 
-    if (credentials.username === validUsername && credentials.password === validPassword) {
+    if (
+      credentials.username === validUsername &&
+      credentials.password === validPassword
+    ) {
       setIsAdmin(true);
+      localStorage.setItem("admin", "true");
       setShowLoginPopup(false);
       setError("");
     } else {
@@ -50,6 +38,7 @@ const Header = ({ isAdmin, setIsAdmin }) => {
 
   const handleLogout = () => {
     setIsAdmin(false);
+    localStorage.removeItem("admin");
   };
 
   return (
@@ -83,7 +72,10 @@ const Header = ({ isAdmin, setIsAdmin }) => {
           className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center"
           style={{ zIndex: 9999 }}
         >
-          <div className="bg-white p-5 rounded shadow-lg w-[400px]" style={{ zIndex: 10000 }}>
+          <div
+            className="bg-white p-5 rounded shadow-lg w-[400px]"
+            style={{ zIndex: 10000 }}
+          >
             <h2 className="text-lg font-bold mb-4">Admin Login</h2>
             {error && <p className="text-red-500 mb-2">{error}</p>}
             <div className="mb-4">
@@ -125,7 +117,6 @@ const Header = ({ isAdmin, setIsAdmin }) => {
           </div>
         </div>
       )}
-
     </header>
   );
 };

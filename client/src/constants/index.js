@@ -1,7 +1,7 @@
 export const navData = [
   {
     id: 1,
-    name: "Dashboard",
+    name: "Home Page",
     href: "/",
     component: "HomePage",
   },
@@ -46,7 +46,13 @@ export const teamsData = [
     href: "/teams/team-falcons.png",
     membersPicture: "/team_mem/TF.jpg",
   },
-  { id: 3, name: "Fnatic", shortName: "FNC", href: "/teams/fnatic.png" ,membersPicture: "/team_mem/FT.jpeg",},
+  {
+    id: 3,
+    name: "Fnatic",
+    shortName: "FNC",
+    href: "/teams/fnatic.png",
+    membersPicture: "/team_mem/FT.jpeg",
+  },
   {
     id: 4,
     name: "Team Secret",
@@ -75,8 +81,20 @@ export const teamsData = [
     href: "/teams/optic-gaming.png",
     membersPicture: "/team_mem/og.jpg",
   },
-  { id: 8, name: "Cloud9", shortName: "C9", href: "/teams/cloud9.png" ,membersPicture: "/team_mem/C9.jpeg",},
-  { id: 9, name: "OG", shortName: "OG", href: "/teams/og.png", membersPicture: "/team_mem/og.jpg", },
+  {
+    id: 8,
+    name: "Cloud9",
+    shortName: "C9",
+    href: "/teams/cloud9.png",
+    membersPicture: "/team_mem/C9.jpeg",
+  },
+  {
+    id: 9,
+    name: "OG",
+    shortName: "OG",
+    href: "/teams/og.png",
+    membersPicture: "/team_mem/og.jpg",
+  },
   {
     id: 10,
     name: "Evil Geniuses",

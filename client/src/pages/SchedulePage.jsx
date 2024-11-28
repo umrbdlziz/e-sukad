@@ -58,12 +58,14 @@ const SchedulePage = () => {
         Match Schedule
       </h1>
       <div className="flex justify-end mb-4">
-        <button
-          onClick={() => handleOpenModal("Add", matchScheduleForm)}
-          className="px-4 py-2 bg-orange-500 text-white rounded-lg"
-        >
-          Add Match
-        </button>
+        {localStorage.getItem("admin") && (
+          <button
+            onClick={() => handleOpenModal("Add", matchScheduleForm)}
+            className="px-4 py-2 bg-orange-500 text-white rounded-lg"
+          >
+            Add Match
+          </button>
+        )}
       </div>
       <div className="mx-10">
         <div className="mx-auto p-4 border rounded-xl border-gray-300">
