@@ -1,6 +1,7 @@
 import { useNavigate, useLocation } from "react-router-dom";
 import { navData } from "../constants";
 import { useState } from "react";
+import PropTypes from "prop-types";
 
 const NavItems = ({ setIsOpen }) => {
   const navigate = useNavigate();
@@ -60,6 +61,10 @@ const Sidebar = () => {
       </div>
     </header>
   );
+};
+
+NavItems.propTypes = {
+  setIsOpen: PropTypes.func.isRequired,
 };
 
 export default Sidebar;

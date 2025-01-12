@@ -1,13 +1,29 @@
 import PropTypes from "prop-types";
-import { teamsData } from "../constants";
+import { useEffect, useState } from "react";
+
 import Modal from "./Model";
-import { useState } from "react";
+import supabase from "../utils/supabase";
 
 const StandingsTable = ({ title, headers, data }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedData, setSelectedData] = useState({});
   const [modalAction, setModalAction] = useState("");
   const [teamLogo, setTeamLogo] = useState("");
+  const [teams, setTeams] = useState([]);
+
+  useEffect(() => {
+    async function getCountries() {
+      let { data: teams, error } = await supabase.from("teams").select();
+
+      if (error) {
+        console.log(error);
+        return;
+      }
+
+      setTeams(teams);
+    }
+    getCountries();
+  }, []);
 
   const handleOpenModal = (action, data = {}, href) => {
     setSelectedData(data);
@@ -38,41 +54,42 @@ const StandingsTable = ({ title, headers, data }) => {
             </tr>
           </thead>
           <tbody>
-            {data.map((team, index) => (
-              <tr
-                key={index}
-                className={`${
-                  index % 2 === 0 ? "bg-gray-200" : "bg-white"
-                } hover:bg-gray-300`}
-                onClick={() =>
-                  handleOpenModal(
-                    "Edit",
-                    team,
-                    teamsData.find((t) => t.id === team.team).href
-                  )
-                }
-              >
-                {headers.map((header, i) => (
-                  <td
-                    key={i}
-                    className="border-t border-b border-gray-300 px-4 py-2 text-center"
-                  >
-                    {header === "Team" ? (
-                      <div className="flex flex-row gap-3 justify-start items-center">
-                        <img
-                          src={teamsData.find((t) => t.id === team.team).href}
-                          className="w-[25px]"
-                          alt="team logo"
-                        />
-                        {teamsData.find((t) => t.id === team.team).name}
-                      </div>
-                    ) : (
-                      team[header.toLowerCase().replace(/ /g, "_")]
-                    )}
-                  </td>
-                ))}
-              </tr>
-            ))}
+            {teams.length !== 0 &&
+              data.map((team, index) => (
+                <tr
+                  key={index}
+                  className={`${
+                    index % 2 === 0 ? "bg-gray-200" : "bg-white"
+                  } hover:bg-gray-300`}
+                  onClick={() =>
+                    handleOpenModal(
+                      "Edit",
+                      team,
+                      teams.find((t) => t.id === team.team).logo
+                    )
+                  }
+                >
+                  {headers.map((header, i) => (
+                    <td
+                      key={i}
+                      className="border-t border-b border-gray-300 px-4 py-2 text-center"
+                    >
+                      {header === "Team" ? (
+                        <div className="flex flex-row gap-3 justify-start items-center">
+                          <img
+                            src={teams.find((t) => t.id === team.team).logo}
+                            className="w-[25px]"
+                            alt="team logo"
+                          />
+                          {teams.find((t) => t.id === team.team).name}
+                        </div>
+                      ) : (
+                        team[header.toLowerCase().replace(/ /g, "_")]
+                      )}
+                    </td>
+                  ))}
+                </tr>
+              ))}
           </tbody>
         </table>
       </div>

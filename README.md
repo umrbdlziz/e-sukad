@@ -1,6 +1,6 @@
 # e-sukad
 
-an event management system
+an event management system for e-sport tournament between desasiswa in USM
 
 ## Getting Started
 
@@ -38,8 +38,17 @@ Make sure you have the following installed on your machine:
    npm run dev
    ```
 
-### Tech Stack
+## Environment Variables
+
+To run this project, you will need to add the following environment variables to your .env file
+
+`VITE_SUPABASE_URL`
+
+`VITE_SUPABASE_ANON_KEY`
+
+## Tech Stack
 
 - [react](https://reactjs.org/)
 - [tailwind css](https://tailwindcss.com/)
 - [react router](https://reactrouter.com/)
+- [supabase](https://supabase.com/)
