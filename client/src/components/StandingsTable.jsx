@@ -1,15 +1,16 @@
 import PropTypes from "prop-types";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import Modal from "./Model";
 import supabase from "../utils/supabase";
 
-const StandingsTable = ({ title, headers, data }) => {
+const StandingsTable = ({ title, headers, game }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedData, setSelectedData] = useState({});
   const [modalAction, setModalAction] = useState("");
   const [teamLogo, setTeamLogo] = useState("");
   const [teams, setTeams] = useState([]);
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     async function getCountries() {
@@ -25,6 +26,36 @@ const StandingsTable = ({ title, headers, data }) => {
     getCountries();
   }, []);
 
+  let tablename = "";
+
+  switch (game) {
+    case "mlbb":
+      tablename = "mlbbteams";
+      break;
+    case "valorant":
+      tablename = "valorantteams";
+      break;
+    case "pubg":
+      tablename = "pubgteams";
+      break;
+    default:
+      break;
+  }
+  const getData = useCallback(async () => {
+    let { data, error } = await supabase.from(tablename).select();
+
+    if (error) {
+      console.log(error);
+      return;
+    }
+
+    setData(data);
+  }, [tablename]);
+
+  useEffect(() => {
+    getData();
+  }, [game, getData]);
+
   const handleOpenModal = (action, data = {}, href) => {
     setSelectedData(data);
     setModalAction(action);
@@ -34,9 +65,47 @@ const StandingsTable = ({ title, headers, data }) => {
     }, 0);
   };
 
+  const onModalSubmit = async (data) => {
+    const { id, ...updateData } = data;
+    let tablename = "";
+
+    switch (game) {
+      case "mlbb":
+        tablename = "mlbbteams";
+        break;
+      case "valorant":
+        tablename = "valorantteams";
+        break;
+      case "pubg":
+        tablename = "pubgteams";
+        break;
+      default:
+        break;
+    }
+    const { error } = await supabase
+      .from(tablename)
+      .update(updateData)
+      .eq("id", id)
+      .select();
+
+    if (error) {
+      console.log(error);
+      return;
+    }
+
+    setIsModalOpen(false);
+    getData();
+  };
+
+  const rearrangeDataByRank = (data) => {
+    return data.sort((a, b) => a.rank - b.rank);
+  };
+
+  const sortedData = rearrangeDataByRank(data);
+
   return (
     <div className="flex flex-col items-center border border-gray-300 rounded-lg p-6 shadow-sm">
-      <h1 className="text-2xl font-bold mb-4">{title}</h1>
+      <h1 className="text-2xl font-semibold mb-4">{title}</h1>
       <div className="w-full overflow-auto">
         <table className="mx-auto overflow-auto border-collapse border-t border-b border-gray-300 bg-white font-semibold text-sm rounded-lg">
           <thead>
@@ -44,7 +113,7 @@ const StandingsTable = ({ title, headers, data }) => {
               {headers.map((header, index) => (
                 <th
                   key={index}
-                  className={`border-t border-b border-gray-300 px-4 py-2 ${
+                  className={`border-t border-b border-gray-300 px-4 py-2 text-xl ${
                     index === 0 ? "rounded-tl-lg" : ""
                   } ${index === headers.length - 1 ? "rounded-tr-lg" : ""}`}
                 >
@@ -55,7 +124,7 @@ const StandingsTable = ({ title, headers, data }) => {
           </thead>
           <tbody>
             {teams.length !== 0 &&
-              data.map((team, index) => (
+              sortedData.map((team, index) => (
                 <tr
                   key={index}
                   className={`${
@@ -72,13 +141,13 @@ const StandingsTable = ({ title, headers, data }) => {
                   {headers.map((header, i) => (
                     <td
                       key={i}
-                      className="border-t border-b border-gray-300 px-4 py-2 text-center"
+                      className="border-t border-b border-gray-300 px-4 py-2 text-center text-lg"
                     >
                       {header === "Team" ? (
                         <div className="flex flex-row gap-3 justify-start items-center">
                           <img
                             src={teams.find((t) => t.id === team.team).logo}
-                            className="w-[25px]"
+                            className="w-[30px]"
                             alt="team logo"
                           />
                           {teams.find((t) => t.id === team.team).name}
@@ -96,7 +165,7 @@ const StandingsTable = ({ title, headers, data }) => {
       <Modal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        onSubmit={() => setIsModalOpen(false)}
+        onSubmit={onModalSubmit}
         initialData={selectedData}
         action={modalAction}
         image={teamLogo}
@@ -108,7 +177,7 @@ const StandingsTable = ({ title, headers, data }) => {
 StandingsTable.propTypes = {
   title: PropTypes.string.isRequired,
   headers: PropTypes.arrayOf(PropTypes.string).isRequired,
-  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  game: PropTypes.string.isRequired,
 };
 
 export default StandingsTable;

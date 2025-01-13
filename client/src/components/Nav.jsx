@@ -13,7 +13,7 @@ const NavItems = ({ setIsOpen }) => {
       {navData.map(({ id, name, href }) => (
         <li key={id} className="py-4">
           <button
-            className={`py-2 sm:hover:text-purple-500 text-orange-500 ${
+            className={`py-2 sm:hover:text-purple-500 text-orange-500 text-xl ${
               currentPath === href && "font-extrabold"
             }`}
             onClick={() => {

@@ -2,6 +2,13 @@ import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { teamsData } from "../constants";
 
+const InputField = ({ label, ...props }) => {
+  switch (label) {
+    default:
+      return <input type="number" {...props} />;
+  }
+};
+
 const Modal = ({ isOpen, onClose, onSubmit, initialData, action, image }) => {
   const [formData, setFormData] = useState(initialData);
 
@@ -85,18 +92,20 @@ const Modal = ({ isOpen, onClose, onSubmit, initialData, action, image }) => {
                   )}
                 </div>
               ) : (
-                <div key={key}>
-                  <label className="block text-gray-700 capitalize">
-                    {key}
-                  </label>
-                  <input
-                    type="text"
-                    name={key}
-                    value={formData[key] || ""}
-                    onChange={handleChange}
-                    className="w-full px-3 py-2 border rounded-lg"
-                  />
-                </div>
+                key !== "id" && (
+                  <div key={key}>
+                    <label className="block text-gray-700 capitalize">
+                      {key}
+                    </label>
+                    <InputField
+                      label={key}
+                      name={key}
+                      value={formData[key] || ""}
+                      onChange={handleChange}
+                      className="w-full px-3 py-2 border rounded-lg"
+                    />
+                  </div>
+                )
               )
             )}
           </div>
@@ -130,8 +139,9 @@ Modal.propTypes = {
   image: PropTypes.string,
 };
 
-Modal.defaultProps = {
-  initialData: {},
+InputField.propTypes = {
+  label: PropTypes.string.isRequired,
+  options: PropTypes.object,
 };
 
 export default Modal;

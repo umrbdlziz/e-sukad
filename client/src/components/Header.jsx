@@ -1,4 +1,5 @@
 import { useState } from "react";
+import PropTypes from "prop-types";
 
 const Header = ({ isAdmin, setIsAdmin }) => {
   const [showLoginPopup, setShowLoginPopup] = useState(false);
@@ -44,7 +45,7 @@ const Header = ({ isAdmin, setIsAdmin }) => {
   return (
     <header className="border-b-2 border-purple-700 relative">
       <div className="flex flex-row justify-between items-center px-5 h-20 max-w-7xl mx-auto w-full">
-        <div className="flex justify-center items-center gap-6">
+        <div className="flex justify-center items-center gap-6 text-2xl font-bold">
           <img src="usm-esport.png" className="w-[50px] h-[50px]" alt="Logo" />
           <h1>{isAdmin ? "Welcome, Admin" : "Welcome, Public"}</h1>
         </div>
@@ -119,6 +120,10 @@ const Header = ({ isAdmin, setIsAdmin }) => {
       )}
     </header>
   );
+};
+Header.propTypes = {
+  isAdmin: PropTypes.bool.isRequired,
+  setIsAdmin: PropTypes.func.isRequired,
 };
 
 export default Header;
