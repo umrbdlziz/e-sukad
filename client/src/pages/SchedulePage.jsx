@@ -96,7 +96,7 @@ const SchedulePage = () => {
     <section>
       <h1 className="text-3xl font-bold text-center my-4">Match Schedule</h1>
       <div className="flex justify-end mb-4">
-        {localStorage.getItem("admin") && (
+        {sessionStorage.getItem("admin")===true && (
           <button
             onClick={() => handleOpenModal("Add", matchScheduleForm)}
             className="px-4 py-2 bg-orange-500 text-white rounded-lg"
@@ -105,6 +105,7 @@ const SchedulePage = () => {
           </button>
         )}
       </div>
+
       <div className="mx-10">
         <div className="mx-auto p-4 mb-5 border rounded-xl border-gray-300">
           <div className="flex justify-start items-center gap-4 mb-4">
