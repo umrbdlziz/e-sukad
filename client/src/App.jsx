@@ -74,9 +74,9 @@ const App = () => {
         <div className="flex flex-col">
           {/* Pass isAdmin and setIsAdmin to Header */}
           <Header isAdmin={isAdmin} setIsAdmin={setIsAdmin} />
-          <div className="bg-gray-100 max-w-7xl mx-auto flex sm:flex-row flex-col">
+          <div className="bg-gray-100 max-w-8xl mx-auto flex sm:flex-row flex-col">
             <Sidebar />
-            <div className="w-screen sm:w-[calc(100vw-210px)] max-w-[calc(1280px-210px)]">
+            <div className="w-screen sm:w-[calc(100vw-210px)] max-w-8xl">
               <Routes>
                 {navData.map((item) => (
                   <Route

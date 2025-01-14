@@ -1,12 +1,62 @@
-import { useState } from "react";
-import { matchSchedule, teamsData, matchScheduleForm } from "../constants";
+import { useEffect, useState } from "react";
+import { matchScheduleForm } from "../constants";
 import Modal from "../components/Model";
+import supabase from "../utils/supabase";
 
 const SchedulePage = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalAction, setModalAction] = useState("");
   const [selectedData, setSelectedData] = useState({});
+  const [teamsData, setTeamsData] = useState([]);
+  const [matchSchedule, setMatchSchedule] = useState([]);
+
+  useEffect(() => {
+    const fetchTeams = async () => {
+      const { data, error } = await supabase.from("teams").select();
+      if (error) {
+        console.log("error", error);
+      } else {
+        setTeamsData(data);
+      }
+    };
+
+    fetchTeams();
+  }, []);
+
+  useEffect(() => {
+    const fetchMatchschedule = async () => {
+      const { data, error } = await supabase.from("matchschedule").select();
+      if (error) {
+        console.log("error", error);
+      } else {
+        data.map((match) => {
+          match.datetime = formatDate(new Date(match.datetime));
+          return match;
+        });
+        setMatchSchedule(data);
+      }
+    };
+
+    fetchMatchschedule();
+  }, []);
+
+  // useEffect(() => {
+  //   const filteredMatches = matchSchedule.filter((match) => {
+  //     console.log(formatDate(match.datetime), selectedDate);
+  //     return formatDate(match.datetime) === formatDate(selectedDate);
+  //   });
+
+  //   setMatchSchedule(filteredMatches);
+  // }, [selectedDate, matchSchedule]);
+
+  const formatDate = (date) => {
+    return date.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "numeric",
+      day: "numeric",
+    });
+  };
 
   const handlePreviousDate = () => {
     setSelectedDate((prevDate) => {
@@ -39,24 +89,12 @@ const SchedulePage = () => {
   });
 
   const filteredMatches = matchSchedule.filter((match) => {
-    const matchDate = new Date(match.datetime).toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "numeric",
-      day: "numeric",
-    });
-    const selectedDateString = selectedDate.toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "numeric",
-      day: "numeric",
-    });
-    return matchDate === selectedDateString;
+    return match.datetime === formatDate(selectedDate);
   });
 
   return (
     <section>
-      <h1 className="text-2xl font-semibold text-center my-4">
-        Match Schedule
-      </h1>
+      <h1 className="text-3xl font-bold text-center my-4">Match Schedule</h1>
       <div className="flex justify-end mb-4">
         {localStorage.getItem("admin") && (
           <button
@@ -68,16 +106,19 @@ const SchedulePage = () => {
         )}
       </div>
       <div className="mx-10">
-        <div className="mx-auto p-4 border rounded-xl border-gray-300">
+        <div className="mx-auto p-4 mb-5 border rounded-xl border-gray-300">
           <div className="flex justify-start items-center gap-4 mb-4">
             <button
-              className="text-orange-500 w-5"
+              className="text-orange-500 w-5 text-3xl"
               onClick={handlePreviousDate}
             >
               &lt;
             </button>
-            <h2 className="text-lg">{formattedDate}</h2>
-            <button className="text-orange-500 w-5" onClick={handleNextDate}>
+            <h2 className="text-xl">{formattedDate}</h2>
+            <button
+              className="text-orange-500 w-5 text-3xl"
+              onClick={handleNextDate}
+            >
               &gt;
             </button>
           </div>
@@ -91,7 +132,7 @@ const SchedulePage = () => {
                 className="border border-gray-300 rounded-lg p-4 shadow-sm mb-4"
               >
                 <div className="flex items-center justify-between">
-                  <span className="text-gray-500">
+                  <span className="text-gray-500 text-lg">
                     {new Date(match.datetime).toLocaleTimeString([], {
                       hour: "2-digit",
                       minute: "2-digit",
@@ -107,53 +148,47 @@ const SchedulePage = () => {
                 </div>
                 <div className="flex items-center justify-center gap-3 mb-2">
                   <span className="text-gray-600">
-                    {
-                      teamsData.find((t) => t.id === match.teams[0].id)
-                        .shortName
-                    }
+                    {teamsData.find((t) => t.id === match.team1_id).shortname}
                   </span>
                   <img
-                    src={teamsData.find((t) => t.id === match.teams[0].id).href}
+                    src={teamsData.find((t) => t.id === match.team1_id).logo}
                     alt="team logo"
                     className="w-8"
                   />
-                  {match.teams[0].result !== null ? (
+                  {match.team1_result !== null ? (
                     <div
                       className={`flex justify-center w-6 rounded text-gray-600 ${
-                        match.teams[0].result > match.teams[1].result
+                        match.team1_result > match.team2_result
                           ? "text-green-500 bg-green-300"
                           : "bg-gray-300"
                       }`}
                     >
-                      <span>{match.teams[0].result}</span>
+                      <span>{match.team1_result}</span>
                     </div>
                   ) : (
                     <span className="text-gray-400">—</span>
                   )}
                   <span className="text-gray-600">vs</span>
-                  {match.teams[1].result !== null ? (
+                  {match.team2_result !== null ? (
                     <div
                       className={`flex justify-center w-6 rounded text-gray-600 ${
-                        match.teams[1].result > match.teams[0].result
+                        match.team2_result > match.team1_result
                           ? "text-green-500 bg-green-300"
                           : "bg-gray-300"
                       }`}
                     >
-                      <span>{match.teams[1].result}</span>
+                      <span>{match.team2_result}</span>
                     </div>
                   ) : (
                     <span className="text-gray-400">—</span>
                   )}
                   <img
-                    src={teamsData.find((t) => t.id === match.teams[1].id).href}
+                    src={teamsData.find((t) => t.id === match.team2_id).logo}
                     alt="team logo"
                     className="w-8"
                   />
                   <span className="text-gray-600">
-                    {
-                      teamsData.find((t) => t.id === match.teams[1].id)
-                        .shortName
-                    }
+                    {teamsData.find((t) => t.id === match.team2_id).shortname}
                   </span>
                 </div>
                 <hr className="border-t border-gray-300 w-full my-2" />
