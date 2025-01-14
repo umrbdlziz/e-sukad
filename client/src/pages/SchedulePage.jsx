@@ -96,7 +96,7 @@ const SchedulePage = () => {
     <section>
       <h1 className="text-3xl font-bold text-center my-4">Match Schedule</h1>
       <div className="flex justify-end mb-4">
-        {sessionStorage.getItem("admin")===true && (
+        {sessionStorage.getItem("admin")=== "true" && (
           <button
             onClick={() => handleOpenModal("Add", matchScheduleForm)}
             className="px-4 py-2 bg-orange-500 text-white rounded-lg"
@@ -140,12 +140,14 @@ const SchedulePage = () => {
                     })}
                   </span>
 
-                  <img
-                    src="edit.png"
-                    alt="edit"
-                    className="w-[20px] h-[20px] cursor-pointer"
-                    onClick={() => handleOpenModal("Edit", match)}
-                  />
+                  {sessionStorage.getItem("admin") === "true" && (
+                    <img
+                      src="edit.png"
+                      alt="edit"
+                      className="w-[20px] h-[20px] cursor-pointer"
+                      onClick={() => handleOpenModal("Edit", match)}
+                    />
+                  )}
                 </div>
                 <div className="flex items-center justify-center gap-3 mb-2">
                   <span className="text-gray-600">
