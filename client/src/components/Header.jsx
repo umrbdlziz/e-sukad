@@ -1,7 +1,8 @@
 import { useState } from "react";
 import supabase from "../utils/supabase";
 import PropTypes from "prop-types";
-import bcrypt from "bcryptjs"; // Install with npm install bcryptjs
+import bcrypt from "bcryptjs"; // Install with npm install bcryptjs'
+import Cookies from "js-cookie";
 
 const Header = ({ isAdmin, setIsAdmin }) => {
   const [showLoginPopup, setShowLoginPopup] = useState(false);
@@ -41,7 +42,8 @@ const Header = ({ isAdmin, setIsAdmin }) => {
 
       if (isValid) {
         setIsAdmin(true);
-        sessionStorage.setItem("admin", "true");
+        Cookies.set("isAdmin", "true", { expires: 1 });
+        console.log(Cookies.get("isAdmin"));
         setShowLoginPopup(false);
         setError("");
       } else {
@@ -55,7 +57,7 @@ const Header = ({ isAdmin, setIsAdmin }) => {
 
   const handleLogout = () => {
     setIsAdmin(false);
-    sessionStorage.removeItem("admin");
+    Cookies.remove("isAdmin");
   };
 
   const handleRegister = async () => {

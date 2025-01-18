@@ -63,10 +63,20 @@ import {
 import Sidebar from "./components/Nav";
 import Header from "./components/Header";
 import { navData } from "./constants";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import Cookies from "js-cookie";
 
 const App = () => {
   const [isAdmin, setIsAdmin] = useState(false); // Manage admin state here
+
+  useEffect(() => {
+    // Check if "isAdmin" cookie exists and update state
+    const adminCookie = Cookies.get("isAdmin");
+    console.log("Admin Cookie:", adminCookie);
+    if (adminCookie === "true") {
+      setIsAdmin(true);
+    }
+  }, []);
 
   return (
     <main>
@@ -87,7 +97,7 @@ const App = () => {
                         // Pass isAdmin to HomePage
                         <HomePage isAdmin={isAdmin} />
                       ) : item.component === "SchedulePage" ? (
-                        <SchedulePage />
+                        <SchedulePage isAdmin={isAdmin} />
                       ) : item.component === "StatisticsPage" ? (
                         <StatisticsPage />
                       ) : item.component === "TeamsPage" ? (
