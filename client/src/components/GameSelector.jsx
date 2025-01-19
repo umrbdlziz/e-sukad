@@ -3,8 +3,14 @@ import PropTypes from "prop-types";
 const GameSelector = ({ selectedGame, onGameChange }) => {
   return (
     <div className="mb-4 pr-5 flex flex-row items-center justify-start">
-      <div style={{ border: '1px solid #D1D5DB', display: 'inline-flex', padding: '5px', borderRadius: '10px' }}>
-        {/* <label htmlFor="game-select">Select Game:</label> */}
+      <div
+        style={{
+          border: "1px solid #D1D5DB",
+          display: "inline-flex",
+          padding: "5px",
+          borderRadius: "10px",
+        }}
+      >
         <select
           id="game-select"
           value={selectedGame}

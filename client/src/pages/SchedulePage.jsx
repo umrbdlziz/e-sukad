@@ -24,31 +24,18 @@ const SchedulePage = ({ isAdmin }) => {
     fetchTeams();
   }, []);
 
-  useEffect(() => {
-    const fetchMatchschedule = async () => {
-      const { data, error } = await supabase.from("matchschedule").select();
-      if (error) {
-        console.log("error", error);
-      } else {
-        data.map((match) => {
-          match.datetime = formatDate(new Date(match.datetime));
-          return match;
-        });
-        setMatchSchedule(data);
-      }
-    };
+  const fetchMatchschedule = async () => {
+    const { data, error } = await supabase.from("matchschedule").select();
+    if (error) {
+      console.log("error", error);
+    } else {
+      setMatchSchedule(data);
+    }
+  };
 
+  useEffect(() => {
     fetchMatchschedule();
   }, []);
-
-  // useEffect(() => {
-  //   const filteredMatches = matchSchedule.filter((match) => {
-  //     console.log(formatDate(match.datetime), selectedDate);
-  //     return formatDate(match.datetime) === formatDate(selectedDate);
-  //   });
-
-  //   setMatchSchedule(filteredMatches);
-  // }, [selectedDate, matchSchedule]);
 
   const formatDate = (date) => {
     return date.toLocaleDateString("en-US", {
@@ -82,6 +69,30 @@ const SchedulePage = ({ isAdmin }) => {
     }, 0);
   };
 
+  const handleSubmit = async (data) => {
+    if (modalAction === "Add") {
+      const { error } = await supabase.from("matchschedule").insert([data]);
+      if (error) {
+        console.log("error", error);
+        return;
+      }
+      fetchMatchschedule();
+      setIsModalOpen(false);
+    } else {
+      const { error } = await supabase
+        .from("matchschedule")
+        .update(data)
+        .eq("id", data.id);
+
+      if (error) {
+        console.log("error", error);
+        return;
+      }
+      fetchMatchschedule();
+      setIsModalOpen(false);
+    }
+  };
+
   const formattedDate = selectedDate.toLocaleDateString("en-US", {
     weekday: "long",
     month: "short",
@@ -89,7 +100,7 @@ const SchedulePage = ({ isAdmin }) => {
   });
 
   const filteredMatches = matchSchedule.filter((match) => {
-    return match.datetime === formatDate(selectedDate);
+    return formatDate(new Date(match.datetime)) === formatDate(selectedDate);
   });
 
   return (
@@ -124,7 +135,7 @@ const SchedulePage = ({ isAdmin }) => {
             </button>
           </div>
 
-          {filteredMatches.length === 0 ? (
+          {filteredMatches.length === 0 || teamsData.length === 0 ? (
             <div className="text-center text-gray-500">No matches</div>
           ) : (
             filteredMatches.map((match, index) => (
@@ -226,7 +237,7 @@ const SchedulePage = ({ isAdmin }) => {
       <Modal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        onSubmit={() => setIsModalOpen(false)}
+        onSubmit={handleSubmit}
         initialData={selectedData}
         action={modalAction}
       />

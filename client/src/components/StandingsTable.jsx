@@ -13,7 +13,7 @@ const StandingsTable = ({ title, headers, game }) => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    async function getCountries() {
+    async function getTeams() {
       let { data: teams, error } = await supabase.from("teams").select();
 
       if (error) {
@@ -23,7 +23,7 @@ const StandingsTable = ({ title, headers, game }) => {
 
       setTeams(teams);
     }
-    getCountries();
+    getTeams();
   }, []);
 
   let tablename = "";

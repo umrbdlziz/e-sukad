@@ -4,6 +4,36 @@ import { teamsData } from "../constants";
 
 const InputField = ({ label, ...props }) => {
   switch (label) {
+    case "duration":
+    case "datetime":
+      return <input type="text" {...props} />;
+    case "location":
+      return (
+        <select {...props}>
+          <option value="Training Room">Training Room</option>
+          <option value="Main Auditorium">Main Auditorium</option>
+          <option value="E-Sports Arena">E-Sports Arena</option>
+          <option value="Grand Stadium">Grand Stadium</option>
+        </select>
+      );
+    case "stage":
+      return (
+        <select {...props}>
+          <option value="Group Stage">Group Stage</option>
+          <option value="Knockout Stage">Knockout Stage</option>
+          <option value="Quarter Finals">Quarter Finals</option>
+          <option value="Semi Finals">Semi Finals</option>
+          <option value="Finals">Finals</option>
+        </select>
+      );
+    case "game":
+      return (
+        <select {...props}>
+          <option value="mlbb">MLBB</option>
+          <option value="valorant">Valorant</option>
+          <option value="pubg">PUBG</option>
+        </select>
+      );
     default:
       return <input type="number" {...props} />;
   }
@@ -100,7 +130,7 @@ const Modal = ({ isOpen, onClose, onSubmit, initialData, action, image }) => {
                     <InputField
                       label={key}
                       name={key}
-                      value={formData[key] || ""}
+                      value={formData[key]}
                       onChange={handleChange}
                       className="w-full px-3 py-2 border rounded-lg"
                     />
@@ -142,6 +172,7 @@ Modal.propTypes = {
 InputField.propTypes = {
   label: PropTypes.string.isRequired,
   options: PropTypes.object,
+  value: PropTypes.any,
 };
 
 export default Modal;
