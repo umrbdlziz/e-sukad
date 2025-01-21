@@ -65,6 +65,7 @@ import Header from "./components/Header";
 import { navData } from "./constants";
 import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 
 const App = () => {
   const [isAdmin, setIsAdmin] = useState(false); // Manage admin state here
@@ -80,13 +81,14 @@ const App = () => {
 
   return (
     <main>
+      <SpeedInsights />
       <BrowserRouter>
         <div className="flex flex-col">
           {/* Pass isAdmin and setIsAdmin to Header */}
           <Header isAdmin={isAdmin} setIsAdmin={setIsAdmin} />
           <div className="bg-gray-100 max-w-8xl mx-auto flex sm:flex-row flex-col">
             <Sidebar />
-            <div className="w-screen sm:w-[calc(100vw-210px)] max-w-8xl">
+            <div className="w-screen sm:w-[calc(100vw-210px)] max-w-7xl">
               <Routes>
                 {navData.map((item) => (
                   <Route
