@@ -42,7 +42,8 @@ const Header = ({ isAdmin, setIsAdmin }) => {
 
       if (isValid) {
         setIsAdmin(true);
-        Cookies.set("isAdmin", "true", { expires: 1 });
+        const expires = new Date(new Date().getTime() + 10 * 1000);
+        Cookies.set("isAdmin", "true", { expires });
         console.log(Cookies.get("isAdmin"));
         setShowLoginPopup(false);
         setError("");
@@ -63,11 +64,14 @@ const Header = ({ isAdmin, setIsAdmin }) => {
   const handleRegister = async () => {
     try {
       const saltRounds = 10;
-      const hashedPassword = await bcrypt.hash(credentials.password, saltRounds);
+      const hashedPassword = await bcrypt.hash(
+        credentials.password,
+        saltRounds
+      );
 
-      const { data, error } = await supabase.from("admins").insert([
-        { username: credentials.username, password: hashedPassword },
-      ]);
+      const { data, error } = await supabase
+        .from("admins")
+        .insert([{ username: credentials.username, password: hashedPassword }]);
 
       if (error) {
         setError("Username already exists or invalid input");
